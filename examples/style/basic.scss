@@ -1,0 +1,18 @@
+@import "neutron";
+
+@include ResetTitle {
+    @include Smoothing;
+    font-weight: normal;
+};
+body {
+    @include SansSerif;
+}
+main {
+    margin: 8rem 10em;
+}
+.output {
+    background: #e8e8e8;
+    padding: 1em 2em;
+    border-radius: 6px;
+    margin-top: 2em;
+}
