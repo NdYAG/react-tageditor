@@ -1,0 +1,89 @@
+%tagEditorFont {
+    font-size: $tagFontSize;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+.tag {
+    display: inline-block;
+    margin-right: .3em;
+    margin-bottom: .5em;
+    position: relative;
+    input {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        box-sizing: content-box;
+
+        color: $tagColor;
+        background-color: $tagBackgroundColor;
+        padding: 0.077em 2em 0.077em 0.692em;
+        min-width: 1em;
+        line-height: 1.846em;
+        height: 1.846em;
+        border-radius: 4px;
+        @extend %tagEditorFont;
+        &:focus {
+            color: $tagColorActive;
+            background-color: transparent;
+            outline: 0;
+            & + a {
+                display: none;
+            }
+        }
+    }
+    a {
+        position: absolute;
+        top: 50%;
+        right: 0.3em;
+        transform: translateY(-50%);
+        border-radius: 50%;
+        cursor: pointer;
+        color: $tagColor;
+        line-height: 0.9;
+        font-size: 1.231em;
+        background: #fff;
+        width: 1em;
+        height: 1em;
+        text-align: center;
+        &:hover {
+            color: $tagColorActive;
+        }
+    }
+    &.has-error {
+        input {
+            background-color: $tagErrorColor;
+        }
+        input,
+        a {
+            transition: color 1s;
+            color: $tagErrorColorDark;
+        }
+    }
+}
+
+.tag-editor {
+    @extend %tagEditorFont;
+    padding: .5em .5em 0;
+    border: 1px solid $editorBorder;
+    cursor: text;
+    &.is-active {
+        border-color: $editorBorderActive;
+    }
+}
+
+.tag-editor-placeholder {
+    @extend %tagEditorFont;
+    padding: 1px 13px 1px 9px;
+    color: $placeholderColor;
+    line-height: 1.846em;
+    height: 1.846em;
+}
+
+.tag-editor-mirror {
+    @extend %tagEditorFont;
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+    width: auto;
+    visibility: hidden;
+}
