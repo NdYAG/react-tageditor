@@ -1,0 +1,29 @@
+{
+  "name": "react-tageditor",
+  "version": "0.1.0",
+  "authors": [
+    "NdYAG <daiximing199078@gmail.com>"
+  ],
+  "description": "A tag editor inspired by StackOverflow's tagging input.",
+  "main": "index.js",
+  "keywords": [
+    "tag",
+    "tageditor",
+    "react",
+    "react-component"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react": "~0.13.3"
+  },
+  "devDependencies": {
+    "neutron": "~0.1.10"
+  }
+}
