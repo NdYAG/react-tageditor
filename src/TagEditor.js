@@ -152,7 +152,8 @@ class TagEditor extends Component {
                     onBlur={this.handleTagBlur.bind(this, tag)}
                     onRemove={this.handleTagRemove.bind(this, tag)}
                     onSplit={this.handleTagSplit.bind(this, tag)}
-                    delimiters={this.props.delimiters}
+                    delimiterKeys={this.props.delimiters.filter( d => { return typeof d === 'number'} )}
+                    delimiterChars={this.props.delimiters.filter( d=> { return typeof d === 'string'} )}
                     key={tag.id}>
                     {tag.text}
                 </Tag>

@@ -51,22 +51,32 @@ class Tag extends Component {
                 })
             }
         }
+        if (this.props.delimiterKeys.indexOf(charCode) > -1) {
+            e.preventDefault()
+            var node = this.refs.input.getDOMNode()
+            this.split(node, utils.getCaretPos(node))
+        }
     }
     handleChange(e) {
         var tagText = e.target.value
           , node = this.refs.input.getDOMNode()
           , caretPos = utils.getCaretPos(node)
           , lastInput = tagText.charAt(caretPos - 1)
-        this.props.delimiters.split('').forEach(function(delimiter) {
+        this.props.delimiterChars.forEach(delimiter =>  {
             if (lastInput === delimiter) {
-                var textBeforeCaret = tagText.substring(0, caretPos - 1)
-                  , textAfterCaret = tagText.substring(caretPos, tagText.length)
-                node.value = textBeforeCaret
-                node.blur()
-                this.props.onSplit(textBeforeCaret, textAfterCaret)
+                this.split(node, caretPos - 1, caretPos)
             }
-        }, this)
+        })
         utils.autoSize(node)
+    }
+    split(node) {
+        var positions = Array.prototype.slice.call(arguments, 1)
+          , tagText = node.value
+          , textBeforeCaret = tagText.substring(0, positions[0])
+          , textAfterCaret = tagText.substring(positions[1] || positions[0], tagText.length)
+        node.value = textBeforeCaret
+        node.blur()
+        this.props.onSplit(textBeforeCaret, textAfterCaret)
     }
     render() {
         return (
@@ -111,15 +121,6 @@ var keyHandlers = {
                 e.originalEvent.preventDefault()
                 this.props.onBlur(e.caret, KEYS.LEFT)
             }
-        },
-        ENTER: function(e) {
-            var tagText = e.node.value
-              , textBeforeCaret = tagText.substring(0, e.caret)
-              , textAfterCaret = tagText.substring(e.caret, tagText.length)
-            e.node.value = textBeforeCaret
-            e.node.blur()
-            e.originalEvent.preventDefault()
-            this.props.onSplit(textBeforeCaret, textAfterCaret)
         }
 }
 

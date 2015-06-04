@@ -9,6 +9,5 @@ export var ERROR_MSG = {
 export var KEYS = {
     BACKSPACE: 8,
     LEFT: 37,
-    RIGHT: 39,
-    ENTER: 13
+    RIGHT: 39
 }

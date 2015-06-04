@@ -35,7 +35,7 @@
                         <TagEditor
                             ref="tagEditor"
                             tags={this.state.tags}
-                            delimiters=","
+                            delimiters={[13, ',']}
                             placeholder="Input tags..."
                             onChange={this.handleTagsChange} />
                         <div className="output">
