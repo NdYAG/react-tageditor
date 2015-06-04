@@ -68,7 +68,7 @@ class TagStore {
                 throw utils.error(ERROR.REPEAT, ERROR_MSG[ERROR.REPEAT])
             }
         }
-        this.options.validate(text)
+        this.options.validate(text, this.output())
     }
     save(tagToSave, text, cb) {
         try {

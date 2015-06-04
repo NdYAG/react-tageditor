@@ -44,9 +44,9 @@ class TagEditor extends Component {
                     }.bind(this), 1500)
                     break
                 default:
-                    // emit error or callback
                     break
             }
+            this.props.onError && this.props.onError(err)
             this.handleTagRemove(tag)
         }.bind(this))
         this.setState({

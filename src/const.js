@@ -1,10 +1,10 @@
 export var ERROR = {
-    EMPTY: 0,
-    REPEAT: 1
+    EMPTY: 'TagEmptyError',
+    REPEAT: 'TagRepeatError'
 }
 export var ERROR_MSG = {
-    0: '',
-    1: ''
+    'TagEmptyError': 'Tag should not be empty',
+    'TagRepeatError': 'Tag should be unique'
 }
 export var KEYS = {
     BACKSPACE: 8,

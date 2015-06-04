@@ -8,7 +8,7 @@ export var connectToStore = TagEditor => class extends Component {
     }
     componentDidMount() {
         var store = new TagStore({
-            validate: function(text) {}
+            validate: this.props.validate || function() {}
         })
         this.props.tags.forEach(tag => {
             store.add(tag)
