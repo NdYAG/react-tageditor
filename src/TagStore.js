@@ -64,7 +64,7 @@ class TagStore {
         for(var i = 0, l = this.tags.length; i < l; i++) {
             var tag = this.tags[i]
             if (tag === tagToSave) { continue }
-            if (tag.text.toLowerCase() === text.toLowerCase()) {
+            if (tag.text.trim() === text.trim()) {
                 throw utils.error(ERROR.REPEAT, ERROR_MSG[ERROR.REPEAT])
             }
         }
