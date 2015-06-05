@@ -2,7 +2,13 @@
     font-size: $tagFontSize;
     font-family: Helvetica, Arial, sans-serif;
 }
-
+%tag {
+    // padding: 0.077em 2em 0.077em 0.692em;
+    // padding: 0.1em 2em 0.1em 0.6em;
+    padding: 1px 2em 1px 0.6em;
+    line-height: 1.8;
+    // height: 1.846em;
+}
 .tag {
     display: inline-block;
     margin-right: .3em;
@@ -10,16 +16,17 @@
     position: relative;
     input {
         margin: 0;
-        padding: 0;
+        // padding: 0;
         border: 0;
         box-sizing: content-box;
 
         color: $tagColor;
         background-color: $tagBackgroundColor;
-        padding: 0.077em 2em 0.077em 0.692em;
+        @extend %tag;
+        // padding: 0.077em 2em 0.077em 0.692em;
         min-width: 1em;
-        line-height: 1.846em;
-        height: 1.846em;
+        // line-height: 1.846em;
+        // height: 1.846em;
         border-radius: 4px;
         @extend %tagEditorFont;
         &:focus {
@@ -35,11 +42,12 @@
         position: absolute;
         top: 50%;
         right: 0.3em;
+        -webkit-transform: translateY(-50%);
         transform: translateY(-50%);
         border-radius: 50%;
         cursor: pointer;
         color: $tagColor;
-        line-height: 0.9;
+        line-height: 1;
         font-size: 1.231em;
         background: #fff;
         width: 1em;
@@ -73,10 +81,11 @@
 
 .tag-editor-placeholder {
     @extend %tagEditorFont;
-    padding: 1px 13px 1px 9px;
+    @extend %tag;
+    // padding: 0.077em 2em 0.077em 0.692em;
     color: $placeholderColor;
-    line-height: 1.846em;
-    height: 1.846em;
+    // line-height: 1.846em;
+    // height: 1.846em;
     margin-bottom: .5em;
 }
 
