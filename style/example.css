@@ -1,0 +1,17 @@
+h1, h2, h3, h4, h5, h6 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizelegibility;
+  font-weight: normal; }
+
+body {
+  font-family: "Helvetica Nenu", Helvetica, Arial, "Hiragino Sans GB", STHeiti, "Microsoft YaHei", "Wenquanyi Micro Hei", sans-serif; }
+
+main {
+  margin: 8rem 10em; }
+
+.output {
+  background: #e8e8e8;
+  padding: 1em 2em;
+  border-radius: 6px;
+  margin-top: 2em; }
