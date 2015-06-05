@@ -39,9 +39,9 @@ class TagEditor extends Component {
                     this.setState({
                         repeat: tagIndex
                     })
-                    setTimeout(function() {
+                    setTimeout(() => {
                         this.setState({ repeat: null })
-                    }.bind(this), 1500)
+                    }, 1500)
                     break
                 default:
                     break

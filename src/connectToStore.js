@@ -16,11 +16,11 @@ export var connectToStore = TagEditor => class extends Component {
         this.setState({
             store: store
         })
-        store.subscribe(function() {
+        store.subscribe(() => {
             this.setState({
                 store: store
             })
-        }.bind(this))
+        })
     }
     add(text) {
         var store = this.state.store
