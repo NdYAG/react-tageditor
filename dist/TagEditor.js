@@ -105,6 +105,8 @@
 	        key: "handleTagSave",
 	        value: function handleTagSave(tag, text) {
 	            this.props.store.save(tag, text, (function (err) {
+	                var _this = this;
+
 	                if (!err) {
 	                    this.props.onChange && this.props.onChange(text, this.props.store.output(), "add");
 	                    return;
@@ -122,14 +124,14 @@
 	                        this.setState({
 	                            repeat: tagIndex
 	                        });
-	                        setTimeout((function () {
-	                            this.setState({ repeat: null });
-	                        }).bind(this), 1500);
+	                        setTimeout(function () {
+	                            _this.setState({ repeat: null });
+	                        }, 1500);
 	                        break;
 	                    default:
-	                        // emit error or callback
 	                        break;
 	                }
+	                this.props.onError && this.props.onError(err);
 	                this.handleTagRemove(tag);
 	            }).bind(this));
 	            this.setState({
@@ -232,7 +234,7 @@
 	    }, {
 	        key: "render",
 	        value: function render() {
-	            var _this = this;
+	            var _this2 = this;
 
 	            var store = this.props.store;
 	            if (!store) {
@@ -244,15 +246,20 @@
 	                return React.createElement(
 	                    _Tag2["default"],
 	                    {
-	                        active: _this.state.editing === i ? true : false,
-	                        error: _this.state.repeat === i ? true : false,
-	                        caret: _this.state.editing === i ? _this.state.caret : null,
-	                        onSave: _this.handleTagSave.bind(_this, tag),
-	                        onFocus: _this.handleTagFocus.bind(_this, tag),
-	                        onBlur: _this.handleTagBlur.bind(_this, tag),
-	                        onRemove: _this.handleTagRemove.bind(_this, tag),
-	                        onSplit: _this.handleTagSplit.bind(_this, tag),
-	                        delimiters: _this.props.delimiters,
+	                        active: _this2.state.editing === i ? true : false,
+	                        error: _this2.state.repeat === i ? true : false,
+	                        caret: _this2.state.editing === i ? _this2.state.caret : null,
+	                        onSave: _this2.handleTagSave.bind(_this2, tag),
+	                        onFocus: _this2.handleTagFocus.bind(_this2, tag),
+	                        onBlur: _this2.handleTagBlur.bind(_this2, tag),
+	                        onRemove: _this2.handleTagRemove.bind(_this2, tag),
+	                        onSplit: _this2.handleTagSplit.bind(_this2, tag),
+	                        delimiterKeys: _this2.props.delimiters.filter(function (d) {
+	                            return typeof d === "number";
+	                        }),
+	                        delimiterChars: _this2.props.delimiters.filter(function (d) {
+	                            return typeof d === "string";
+	                        }),
 	                        key: tag.id },
 	                    tag.text
 	                );
@@ -295,20 +302,19 @@
 	    value: true
 	});
 	var ERROR = {
-	    EMPTY: 0,
-	    REPEAT: 1
+	    EMPTY: 'TagEmptyError',
+	    REPEAT: 'TagRepeatError'
 	};
 	exports.ERROR = ERROR;
 	var ERROR_MSG = {
-	    0: '',
-	    1: ''
+	    'TagEmptyError': 'Tag should not be empty',
+	    'TagRepeatError': 'Tag should be unique'
 	};
 	exports.ERROR_MSG = ERROR_MSG;
 	var KEYS = {
 	    BACKSPACE: 8,
 	    LEFT: 37,
-	    RIGHT: 39,
-	    ENTER: 13
+	    RIGHT: 39
 	};
 	exports.KEYS = KEYS;
 
@@ -367,8 +373,10 @@
 	        _createClass(_class, [{
 	            key: "componentDidMount",
 	            value: function componentDidMount() {
+	                var _this = this;
+
 	                var store = new _TagStore2["default"]({
-	                    validate: function validate(text) {}
+	                    validate: this.props.validate || function () {}
 	                });
 	                this.props.tags.forEach(function (tag) {
 	                    store.add(tag);
@@ -376,11 +384,11 @@
 	                this.setState({
 	                    store: store
 	                });
-	                store.subscribe((function () {
-	                    this.setState({
+	                store.subscribe(function () {
+	                    _this.setState({
 	                        store: store
 	                    });
-	                }).bind(this));
+	                });
 	            }
 	        }, {
 	            key: "add",
@@ -523,11 +531,11 @@
 	                if (tag === tagToSave) {
 	                    continue;
 	                }
-	                if (tag.text.toLowerCase() === text.toLowerCase()) {
+	                if (tag.text.trim() === text.trim()) {
 	                    throw _utils2["default"].error(_const.ERROR.REPEAT, _const.ERROR_MSG[_const.ERROR.REPEAT]);
 	                }
 	            }
-	            this.options.validate(text);
+	            this.options.validate(text, this.output());
 	        }
 	    }, {
 	        key: "save",
@@ -734,24 +742,38 @@
 	                    });
 	                }
 	            }
+	            if (this.props.delimiterKeys.indexOf(charCode) > -1) {
+	                e.preventDefault();
+	                var node = this.refs.input.getDOMNode();
+	                this.split(node, _utils2["default"].getCaretPos(node));
+	            }
 	        }
 	    }, {
 	        key: "handleChange",
 	        value: function handleChange(e) {
+	            var _this = this;
+
 	            var tagText = e.target.value,
 	                node = this.refs.input.getDOMNode(),
 	                caretPos = _utils2["default"].getCaretPos(node),
 	                lastInput = tagText.charAt(caretPos - 1);
-	            this.props.delimiters.split("").forEach(function (delimiter) {
+	            this.props.delimiterChars.forEach(function (delimiter) {
 	                if (lastInput === delimiter) {
-	                    var textBeforeCaret = tagText.substring(0, caretPos - 1),
-	                        textAfterCaret = tagText.substring(caretPos, tagText.length);
-	                    node.value = textBeforeCaret;
-	                    node.blur();
-	                    this.props.onSplit(textBeforeCaret, textAfterCaret);
+	                    _this.split(node, caretPos - 1, caretPos);
 	                }
-	            }, this);
+	            });
 	            _utils2["default"].autoSize(node);
+	        }
+	    }, {
+	        key: "split",
+	        value: function split(node) {
+	            var positions = Array.prototype.slice.call(arguments, 1),
+	                tagText = node.value,
+	                textBeforeCaret = tagText.substring(0, positions[0]),
+	                textAfterCaret = tagText.substring(positions[1] || positions[0], tagText.length);
+	            node.value = textBeforeCaret;
+	            node.blur();
+	            this.props.onSplit(textBeforeCaret, textAfterCaret);
 	        }
 	    }, {
 	        key: "render",
@@ -807,15 +829,6 @@
 	            e.originalEvent.preventDefault();
 	            this.props.onBlur(e.caret, _const.KEYS.LEFT);
 	        }
-	    },
-	    ENTER: function ENTER(e) {
-	        var tagText = e.node.value,
-	            textBeforeCaret = tagText.substring(0, e.caret),
-	            textAfterCaret = tagText.substring(e.caret, tagText.length);
-	        e.node.value = textBeforeCaret;
-	        e.node.blur();
-	        e.originalEvent.preventDefault();
-	        this.props.onSplit(textBeforeCaret, textAfterCaret);
 	    }
 	};
 
