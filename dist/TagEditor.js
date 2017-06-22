@@ -42,14 +42,14 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["TagEditor"] = __webpack_require__(1);
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
-/***/ },
+/***/ }),
 /* 1 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 
@@ -59,13 +59,13 @@
 
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var _const = __webpack_require__(2);
 
@@ -78,6 +78,8 @@
 	var _Tag2 = _interopRequireDefault(_Tag);
 
 	var TagEditor = (function (_Component) {
+	    _inherits(TagEditor, _Component);
+
 	    function TagEditor(props) {
 	        _classCallCheck(this, TagEditor);
 
@@ -89,12 +91,10 @@
 	        };
 	    }
 
-	    _inherits(TagEditor, _Component);
-
 	    _createClass(TagEditor, [{
 	        key: "handleClick",
 	        value: function handleClick() {
-	            this.props.store.add("", (function (err, newTag, indexOfNewTag) {
+	            this.props.store.add('', (function (err, newTag, indexOfNewTag) {
 	                this.setState({
 	                    editing: indexOfNewTag,
 	                    caret: 0
@@ -108,7 +108,7 @@
 	                var _this = this;
 
 	                if (!err) {
-	                    this.props.onChange && this.props.onChange(text, this.props.store.output(), "add");
+	                    this.props.onChange && this.props.onChange(text, this.props.store.output(), 'add');
 	                    return;
 	                }
 	                switch (err.name) {
@@ -219,7 +219,7 @@
 	        value: function handleTagRemove(tag) {
 	            var tagText = tag.text;
 	            this.props.store.remove(tag);
-	            tagText.length && this.props.onChange && this.props.onChange(tagText, this.props.store.output(), "remove");
+	            tagText.length && this.props.onChange && this.props.onChange(tagText, this.props.store.output(), 'remove');
 	        }
 	    }, {
 	        key: "handleTagSplit",
@@ -255,10 +255,10 @@
 	                        onRemove: _this2.handleTagRemove.bind(_this2, tag),
 	                        onSplit: _this2.handleTagSplit.bind(_this2, tag),
 	                        delimiterKeys: _this2.props.delimiters.filter(function (d) {
-	                            return typeof d === "number";
+	                            return typeof d === 'number';
 	                        }),
 	                        delimiterChars: _this2.props.delimiters.filter(function (d) {
-	                            return typeof d === "string";
+	                            return typeof d === 'string';
 	                        }),
 	                        key: tag.id },
 	                    tag.text
@@ -273,7 +273,7 @@
 	            }
 	            return React.createElement(
 	                "div",
-	                { className: "tag-editor" + (typeof this.state.editing === "number" ? " is-active" : ""), onClick: this.handleClick.bind(this), ref: "editor" },
+	                { className: "tag-editor" + (typeof this.state.editing === 'number' ? " is-active" : ""), onClick: this.handleClick.bind(this), ref: "editor" },
 	                tagNodes
 	            );
 	        }
@@ -285,16 +285,16 @@
 	exports["default"] = (0, _connectToStore.connectToStore)(TagEditor);
 	module.exports = exports["default"];
 
-/***/ },
+/***/ }),
 /* 2 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["TagEditor"] = __webpack_require__(3);
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
-/***/ },
+/***/ }),
 /* 3 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
 	'use strict';
 
@@ -318,22 +318,22 @@
 	};
 	exports.KEYS = KEYS;
 
-/***/ },
+/***/ }),
 /* 4 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
 	module.exports = React;
 
-/***/ },
+/***/ }),
 /* 5 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["TagEditor"] = __webpack_require__(6);
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
-/***/ },
+/***/ }),
 /* 6 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 
@@ -345,13 +345,13 @@
 
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var _react = __webpack_require__(4);
 
@@ -361,14 +361,14 @@
 
 	var connectToStore = function connectToStore(TagEditor) {
 	    return (function (_Component) {
-	        var _class = function () {
+	        _inherits(_class, _Component);
+
+	        function _class() {
 	            _classCallCheck(this, _class);
 
 	            _get(Object.getPrototypeOf(_class.prototype), "constructor", this).call(this);
 	            this.state = { store: null };
-	        };
-
-	        _inherits(_class, _Component);
+	        }
 
 	        _createClass(_class, [{
 	            key: "componentDidMount",
@@ -423,16 +423,16 @@
 	};
 	exports.connectToStore = connectToStore;
 
-/***/ },
+/***/ }),
 /* 7 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["TagEditor"] = __webpack_require__(8);
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
-/***/ },
+/***/ }),
 /* 8 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 
@@ -578,16 +578,16 @@
 	exports["default"] = TagStore;
 	module.exports = exports["default"];
 
-/***/ },
+/***/ }),
 /* 9 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["TagEditor"] = __webpack_require__(10);
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
-/***/ },
+/***/ }),
 /* 10 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
 	'use strict';
 
@@ -609,7 +609,7 @@
 	    },
 	    getCharcode: function getCharcode(e) {
 	        var charCode = e.charCode;
-	        return typeof charCode === 'number' && charCode !== 0 ? charCode : e.keyCode;
+	        return typeof charCode === "number" && charCode !== 0 ? charCode : e.keyCode;
 	    },
 	    setCaretPos: function setCaretPos(input_node, pos) {
 	        if (input_node.setSelectionRange) {
@@ -641,16 +641,16 @@
 	exports['default'] = utils;
 	module.exports = exports['default'];
 
-/***/ },
+/***/ }),
 /* 11 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["TagEditor"] = __webpack_require__(12);
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
-/***/ },
+/***/ }),
 /* 12 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 
@@ -660,15 +660,17 @@
 
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var _react = __webpack_require__(4);
+
+	var _react2 = _interopRequireDefault(_react);
 
 	var _const = __webpack_require__(2);
 
@@ -677,13 +679,13 @@
 	var _utils2 = _interopRequireDefault(_utils);
 
 	var Tag = (function (_Component) {
+	    _inherits(Tag, _Component);
+
 	    function Tag(props) {
 	        _classCallCheck(this, Tag);
 
 	        _get(Object.getPrototypeOf(Tag.prototype), "constructor", this).call(this, props);
 	    }
-
-	    _inherits(Tag, _Component);
 
 	    _createClass(Tag, [{
 	        key: "componentDidMount",
@@ -700,7 +702,7 @@
 	        key: "componentWillReceiveProps",
 	        value: function componentWillReceiveProps(nextProps) {
 	            var node = this.refs.input.getDOMNode(),
-	                tagNode = React.findDOMNode(this),
+	                tagNode = _react2["default"].findDOMNode(this),
 	                activityChanged = this.props.active !== nextProps.active;
 
 	            if (nextProps.active) {
@@ -713,7 +715,7 @@
 	        key: "handleClick",
 	        value: function handleClick(e) {
 	            e.stopPropagation();
-	            if (e.target.tagName === "A") {
+	            if (e.target.tagName === 'A') {
 	                // click on X to remove
 	                this.props.onRemove();
 	            }
@@ -778,10 +780,10 @@
 	    }, {
 	        key: "render",
 	        value: function render() {
-	            return React.createElement(
+	            return _react2["default"].createElement(
 	                "div",
 	                { className: "tag" + (this.props.error ? " has-error" : ""), onClick: this.handleClick.bind(this) },
-	                React.createElement("input", {
+	                _react2["default"].createElement("input", {
 	                    type: "text",
 	                    defaultValue: this.props.children.toString(),
 	                    ref: "input",
@@ -789,7 +791,7 @@
 	                    onBlur: this.handleBlur.bind(this),
 	                    onKeyDown: this.handleKeyDown.bind(this),
 	                    onChange: this.handleChange.bind(this) }),
-	                React.createElement(
+	                _react2["default"].createElement(
 	                    "a",
 	                    { className: "" },
 	                    "×"
@@ -835,5 +837,5 @@
 	exports["default"] = Tag;
 	module.exports = exports["default"];
 
-/***/ }
+/***/ })
 /******/ ]);
