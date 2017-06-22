@@ -2,7 +2,7 @@
   "name": "react-tageditor",
   "version": "0.1.0",
   "description": "A tag editor built with react.js",
-  "main": "src/TagEditor.js",
+  "main": "dist/TagEditor.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run build-js & npm run build-css",
