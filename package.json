@@ -1,6 +1,6 @@
 {
   "name": "react-tageditor",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A tag editor built with react.js",
   "main": "dist/TagEditor.js",
   "scripts": {
@@ -11,18 +11,18 @@
     "build-example": "sass --sourcemap=none --load-path=bower_components/neutron/  --style compressed -scss --update examples/style/:examples/style/"
   },
   "repository": {
-      "type": "git",
-      "url": "git+https://github.com/NdYAG/react-tageditor.git"
+    "type": "git",
+    "url": "git+https://github.com/NdYAG/react-tageditor.git"
   },
   "keywords": [
-      "react",
-      "tag",
-      "tageditor",
-      "react-component"
+    "react",
+    "tag",
+    "tageditor",
+    "react-component"
   ],
   "author": "NdYAG",
   "bugs": {
-      "url": "https://github.com/NdYAG/react-tageditor/issues"
+    "url": "https://github.com/NdYAG/react-tageditor/issues"
   },
   "homepage": "https://daix.me/react-tageditor",
   "license": "MIT",

@@ -1,5 +1,5 @@
 import { KEYS, ERROR } from "./const"
-import { Component } from "react"
+import React, { Component } from "react"
 import { connectToStore } from "./connectToStore"
 import Tag from "./Tag"
 

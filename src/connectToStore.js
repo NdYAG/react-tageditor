@@ -1,4 +1,4 @@
-import { Component } from "react"
+import React, { Component } from "react"
 import TagStore from "./TagStore"
 
 export var connectToStore = TagEditor => class extends Component {
