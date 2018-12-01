@@ -163,7 +163,7 @@ class TagEditor extends Component {
             tagNodes = <div className="tag-editor-placeholder">{this.props.placeholder}</div>
         }
         return (
-            <div className={"tag-editor" + (typeof this.state.editing === 'number'? " is-active": "")} onClick={this.handleClick.bind(this)} ref="editor">
+            <div className={"tag-editor" + (typeof this.state.editing === 'number'? " is-active": "")} onClick={this.handleClick.bind(this)}>
                 {tagNodes}
             </div>
         )
