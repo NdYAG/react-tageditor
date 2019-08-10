@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run build-js & npm run build-css",
     "build-js": "webpack",
-    "build-css": "sass --sourcemap=none --scss --update src/style/:dist/style/",
+    "build-css": "sass --update src/style/:dist/style/",
     "build-example": "sass --sourcemap=none --load-path=node_modules/sass-pattern/  --style compressed -scss --update examples/style/:examples/style/"
   },
   "repository": {
