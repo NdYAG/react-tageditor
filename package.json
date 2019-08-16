@@ -1,18 +1,18 @@
 {
-  "name": "react-tageditor",
-  "version": "0.2.0",
+  "name": "@akshay090/react-tageditor",
+  "version": "0.2.2",
   "description": "A tag editor built with react.js",
   "main": "dist/TagEditor.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run build-js & npm run build-css",
-    "build-js": "webpack",
+    "build-js": "webpack --mode production",
     "build-css": "sass --update src/style/:dist/style/",
     "build-example": "sass --sourcemap=none --load-path=node_modules/sass-pattern/  --style compressed -scss --update examples/style/:examples/style/"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NdYAG/react-tageditor.git"
+    "url": "git+https://github.com/Akshay090/react-tageditor.git"
   },
   "keywords": [
     "react",
@@ -20,11 +20,11 @@
     "tageditor",
     "react-component"
   ],
-  "author": "NdYAG",
+  "author": "Akshay090",
   "bugs": {
-    "url": "https://github.com/NdYAG/react-tageditor/issues"
+    "url": "https://github.com/Akshay090/react-tageditor"
   },
-  "homepage": "https://daix.me/react-tageditor",
+  "homepage": "https://github.com/Akshay090/react-tagedito",
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.1.6",
@@ -38,8 +38,11 @@
     "webpack-cli": "^3.1.2"
   },
   "dependencies": {
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
     "sass-pattern": "^0.1.10"
+  },
+  "directories": {
+    "example": "examples"
   }
 }
