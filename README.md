@@ -53,6 +53,7 @@ All attributes are optional.
 * `validation(currentTag, allTags)`: A function for validating. Throw an error when tag/tags do not meet your requirement. Error will be passed to `onError`.
 * `onChange(tagsChanged, allTags, action)`: Callback triggered after tags added or removed.`action` will be `add` or `remove`.
 * `onError(error)`: Callback triggered on error. Access more information about the error via `error.name` & `error.message`.
+* `currentTagTxt(tagInput)`: Callback triggered when tags are being added.
 
 ### Methods
 
